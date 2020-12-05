@@ -1,6 +1,8 @@
+import { Title } from '../styles/pages/Home';
+
 const Home = () => (
   <div>
-    <h1>Henlo World</h1>
+    <Title>Henlo World</Title>
     <strong>/</strong>
   </div>
 );
