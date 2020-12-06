@@ -5,7 +5,6 @@ import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-dom';
 import { Document } from 'prismic-javascript/types/documents';
 
-import { Title } from '@/styles/pages/Home';
 import { client } from '@/lib/prismic';
 
 interface CategoryProps {
@@ -14,7 +13,7 @@ interface CategoryProps {
 }
 
 const Category = ({ category, products }: CategoryProps) => {
-  const { query, isFallback } = useRouter();
+  const { isFallback } = useRouter();
 
   if (isFallback) {
     return <p>Carregando</p>
