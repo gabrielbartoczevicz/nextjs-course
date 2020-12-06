@@ -17,6 +17,9 @@ const Home = ({ recommendedProducts }: HomeProps) => {
   const handleSum = useCallback(async () => {
     const { sum, randomBetween } = await import('../lib/math');
 
+    console.log(process.env.API_URL); // undefined
+    console.log(process.env.NEXT_PUBLIC_VAR);
+
     alert(sum([randomBetween(), randomBetween()]));
   }, [])
 
@@ -42,7 +45,7 @@ const Home = ({ recommendedProducts }: HomeProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const response = await fetch('http://localhost:3333/recommended');
+  const response = await fetch(`${process.env.API_URL}/recommended`); // process is SS
 
   const recommendedProducts = await response.json()
 
