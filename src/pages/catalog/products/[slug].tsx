@@ -1,12 +1,30 @@
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+
+const AddToCartModal = dynamic(
+  () => import('../../../components/AddToCartModal'),
+  {
+    loading: () => <p>Loading</p>,
+    ssr: false,
+  }
+)
 
 const Product = () => {
   const { query } = useRouter();
+  const [isAddToCartModalVisible, setIsAddToCartModalVisible] = useState(false);
+
+  const handleAddToCart = useCallback(() => {
+    setIsAddToCartModalVisible(true);
+  }, []);
 
   return (
     <div>
       <h1>{query.slug}</h1>
-      <strong>/catalog/products/{query.slug}</strong>
+
+      <button onClick={handleAddToCart} >Add to cart</button>
+
+      {isAddToCartModalVisible && <AddToCartModal />}
     </div>
   )
 }
