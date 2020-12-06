@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { Title } from '../styles/pages/Home';
+import { Title } from '@/styles/pages/Home';
 
 interface IProduct {
   id: string;
@@ -31,7 +31,7 @@ const Top10 = ({ products }: Top10Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Top10Props> = async () => {
-  const response = await fetch('http://localhost:3333/products');
+  const response = await fetch(`${process.env.API_URL}/products`);
 
   const products = await response.json()
 
