@@ -1,36 +1,24 @@
-import { useCallback } from 'react';
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+import Prismic from 'prismic-javascript';
+import { RichText } from 'prismic-dom';
+import { Document } from 'prismic-javascript/types/documents';
 
 import SEO from '@/components/SEO';
-
+import { client } from '@/lib/prismic';
 import { Title } from '@/styles/pages/Home';
 
-interface IProduct {
-  id: string;
-  title: string;
-}
-
 interface HomeProps {
-  recommendedProducts: IProduct[];
+  recommendedProducts: Document[];
 }
 
 const Home = ({ recommendedProducts }: HomeProps) => {
-
-  const handleSum = useCallback(async () => {
-    const { sum, randomBetween } = await import('../lib/math');
-
-    console.log(process.env.API_URL); // undefined
-    console.log(process.env.NEXT_PUBLIC_VAR);
-
-    alert(sum([randomBetween(), randomBetween()]));
-  }, [])
-
   return (
     <>
-      <SEO 
-        title="Potat" 
+      <SEO
+        title="Potat"
         shouldExcludeTitleSuffix
-        image="thumb.jpeg" 
+        image="thumb.jpeg"
       />
 
       <Title>Henlo World</Title>
@@ -41,25 +29,27 @@ const Home = ({ recommendedProducts }: HomeProps) => {
         <ul>
           {recommendedProducts.map(product => (
             <li key={product.id} >
-              {product.title}
+              <Link href={`/catalog/products/${product.uid}`}>
+                <a>
+                  {RichText.asText(product.data.title)}
+                </a>
+              </Link>
             </li>
           ))}
         </ul>
       </section>
-
-      <button onClick={handleSum}>Sum</button>
     </>
   )
 };
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const response = await fetch(`${process.env.API_URL}/recommended`); // process is SS
-
-  const recommendedProducts = await response.json()
+  const recommendedProducts = await client().query([
+    Prismic.Predicates.at('document.type', 'product')
+  ]);
 
   return {
     props: {
-      recommendedProducts,
+      recommendedProducts: recommendedProducts.results,
     }
   }
 }
