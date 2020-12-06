@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
-  
+import { useCallback } from 'react';
+
 import { Title } from '../styles/pages/Home';
 
 interface IProduct {
@@ -12,6 +13,13 @@ interface HomeProps {
 }
 
 const Home = ({ recommendedProducts }: HomeProps) => {
+
+  const handleSum = useCallback(async () => {
+    const { sum, randomBetween } = await import('../lib/math');
+
+    alert(sum([randomBetween(), randomBetween()]));
+  }, [])
+
   return (
     <>
       <Title>Henlo World</Title>
@@ -27,6 +35,8 @@ const Home = ({ recommendedProducts }: HomeProps) => {
           ))}
         </ul>
       </section>
+
+      <button onClick={handleSum}>Sum</button>
     </>
   )
 };
