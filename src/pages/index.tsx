@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 
+import SEO from '@/components/SEO';
+
 import { Title } from '@/styles/pages/Home';
 
 interface IProduct {
@@ -25,6 +27,12 @@ const Home = ({ recommendedProducts }: HomeProps) => {
 
   return (
     <>
+      <SEO 
+        title="Potat" 
+        shouldExcludeTitleSuffix
+        image="thumb.jpeg" 
+      />
+
       <Title>Henlo World</Title>
 
       <section>
