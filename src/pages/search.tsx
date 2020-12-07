@@ -18,8 +18,6 @@ const Search = ({ searchResults }: SearchProps) => {
   const handleSearch = useCallback((e: FormEvent) => {
     e.preventDefault();
 
-    console.log(e.target);
-
     router.push(`/search?q=${encodeURIComponent(search)}`);
 
     setSearch('');

@@ -16,7 +16,7 @@ const SEO = ({
   shouldIndexPage = true }: SEOProps) => {
 
   const pageTitle = `${title}${!shouldExcludeTitleSuffix ? `| Suffix Example` : ''}`;
-  const pageThumb = image ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}` : null;
+  const pageThumb = image ? `${process.env.NOW_URL}/${image}` : null;
 
   return (
     <Head>
