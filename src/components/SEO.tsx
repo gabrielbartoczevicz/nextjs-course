@@ -20,8 +20,6 @@ const SEO = ({
   const pageTitle = `${title}${!shouldExcludeTitleSuffix ? `| Suffix Example` : ''}`;
   const pageThumb = image ? `${env.domain}/${image}` : null;
 
-  console.log(pageThumb);
-
   return (
     <Head>
       <title>{pageTitle}</title>

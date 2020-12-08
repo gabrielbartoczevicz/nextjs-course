@@ -1,5 +1,7 @@
 const production = process.env.NODE_ENV === 'production';
 
+const domain = production ? process.env.VERCEL_URL : 'http://localhost:3000';
+
 export default {
-  domain: production ? process.env.VERCEL_URL : process.env.APP_DOMAIN,
+  domain: production ? `https://${domain}` : domain,
 }
