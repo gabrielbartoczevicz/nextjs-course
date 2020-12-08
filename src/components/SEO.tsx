@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import env from '@/config/env';
+
 interface SEOProps {
   title: string;
   description?: string;
@@ -16,7 +18,9 @@ const SEO = ({
   shouldIndexPage = true }: SEOProps) => {
 
   const pageTitle = `${title}${!shouldExcludeTitleSuffix ? `| Suffix Example` : ''}`;
-  const pageThumb = image ? `${process.env.NOW_URL}/${image}` : null;
+  const pageThumb = image ? `${env.domain}/${image}` : null;
+
+  console.log(pageThumb);
 
   return (
     <Head>
