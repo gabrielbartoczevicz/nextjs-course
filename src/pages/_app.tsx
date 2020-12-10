@@ -1,10 +1,9 @@
-import GlobalStyle from '@/styles/GlobalStyle';
+import ThemeContainer from '../context/theme/ThemeContainer';
 
 const App = ({ Component, pageProps }) => (
-  <>
-    <GlobalStyle />
+  <ThemeContainer>
     <Component {...pageProps} />
-  </>
+  </ThemeContainer>
 );
 
 export default App

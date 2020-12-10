@@ -4,6 +4,7 @@ import { RichText } from 'prismic-dom';
 import { Document } from 'prismic-javascript/types/documents';
 
 import { client } from '@/lib/prismic';
+import SEO from '@/components/SEO';
 
 interface ProductProps {
   product: Document;
@@ -17,17 +18,25 @@ const Product = ({ product }: ProductProps) => {
   }
 
   return (
-    <div>
-      <h1>
-        {RichText.asText(product.data.title)}
-      </h1>
+    <>
+      <SEO
+        title={RichText.asText(product.data.title)}
+        shouldExcludeTitleSuffix
+        image={product.data.thumbnail.url}
+      />
 
-      <img src={product.data.thumbnail.url} width="300" alt="a" />
+      <div>
+        <h1>
+          {RichText.asText(product.data.title)}
+        </h1>
 
-      <div dangerouslySetInnerHTML={{ __html: RichText.asHtml(product.data.description) }} />
+        <img src={product.data.thumbnail.url} width="300" alt="a" />
 
-      <p>Price: R$ {product.data.price}</p>
-    </div>
+        <div dangerouslySetInnerHTML={{ __html: RichText.asHtml(product.data.description) }} />
+
+        <p>Price: R$ {product.data.price}</p>
+      </div>
+    </>
   )
 }
 
